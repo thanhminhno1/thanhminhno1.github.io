@@ -5,6 +5,8 @@ excerpt: "Form React vs Formik vs React Form Hook"
 tags: [react, code, form]
 modified: 2020-06-19
 comments: true
+image:
+  feature: react-hook-form.png
 ---
 
 Làm việc với form và một trong những vấn để thử thách nhất khi phát triển ứng dụng bằng React. React là một thư viện tối giản chỉ tập trung vào việc kiểm soát sự thay đổi của giao diện, đảm bảo rằng giao diện người dùng sẽ thay đổi phù hợp với hoạt động họ. Nó không cung cấp một giải pháp hoàn chỉnh nào cho việc sử dụng input nhưng nó cung cho ta phương thức để lưu giá trị của input vào state.
