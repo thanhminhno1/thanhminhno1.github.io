@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Form React vs Formik vs React Form Hook">
+  <meta name="keywords" content="blog and thanhminhno1">
+  <meta name="author" content="React Form Hook | Minh&#39;s Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="React Form Hook | Minh&#39;s Blog">
+  <meta name="twitter:description" content="Form React vs Formik vs React Form Hook">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2020-06/react-form-hook">
+  <meta property="og:title" content="React Form Hook | Minh&#39;s Blog">
+  <meta property="og:description" content="Form React vs Formik vs React Form Hook">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>React Form Hook | Minh's Blog</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2020-06/react-form-hook">
+  <link rel="alternate" type="application/rss+xml" title="Minh&#39;s Blog" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/avatar.jpeg" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">Nguyen Thanh Minh</a>
+  <span class="author_job">Web Developer</span>
+  <span class="author_bio mbm">Blog về công nghệ và cuộc sống</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('nguyenthanhminh10101994@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    <li><a href="http://facebook.com/thanhminhno1" class="social-link-item" target="_blank"><i class="fa fa-fw fa-facebook"></i></a></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="http://github.com/thanhminhno1" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="React Form Hook">React Form Hook</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        19 JUN 2020
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    19 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>Làm việc với form và một trong những vấn để thử thách nhất khi phát triển ứng dụng bằng React. React là một thư viện tối giản chỉ tập trung vào việc kiểm soát sự thay đổi của giao diện, đảm bảo rằng giao diện người dùng sẽ thay đổi phù hợp với hoạt động họ. Nó không cung cấp một giải pháp hoàn chỉnh nào cho việc sử dụng input nhưng nó cung cho ta phương thức để lưu giá trị của input vào state.</p>
+
+<p>Việc xử lý form với React yêu cầu bạn phải viết một số đoạn mã phục vụ việc:</p>
+<ol>
+  <li>Quản lý vào kiểm soát giá trị input mà bạn lưu vào state</li>
+  <li>Theo dõi error messages</li>
+  <li>xử lý submission</li>
+</ol>
+
+<p>Để việc xử lý form được đơn giản hơn, nhiều developer đã tạo ra các thư viện giúp build form với React. Một trong những thư viện phổ biến nhất là <a href="https://jaredpalmer.com/formik/">Formik</a></p>
+
+<p>Bản thân tôi đã từng sử dụng thư viện này như một giải pháp khi làm việc với Form của React và nó hoạt động thực sự tuyệt vời, Nhưng gần đây tôi đang làm việc với một thư viện mới có tên là <a href="https://react-hook-form.com/">React Hook Form</a></p>
+
+<p>Trong bài viết này tôi sẽ cho bạn thấy được lợi ích của việc sử dụng <code class="language-plaintext highlighter-rouge">React Hook Form</code> hơn là sử dụng <code class="language-plaintext highlighter-rouge">Formik</code>. Nhưng đầu tiên hãy tìm hiểu làm thế nào để tạo ra Form bằng React Form.</p>
+
+<h3 id="how-to-handle-forms-with-react">How to handle forms with React</h3>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+  <span class="k">import</span> <span class="dl">"</span><span class="s2">bootstrap/dist/css/bootstrap.css</span><span class="dl">"</span><span class="p">;</span>
+
+  <span class="k">export</span> <span class="k">default</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">formState</span><span class="p">,</span> <span class="nx">setFormState</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span>
+      <span class="na">formValues</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+        <span class="na">password</span><span class="p">:</span> <span class="dl">""</span>
+      <span class="p">},</span>
+      <span class="na">formErrors</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+        <span class="na">password</span><span class="p">:</span> <span class="dl">""</span>
+      <span class="p">},</span>
+      <span class="na">formValidity</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">email</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">password</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="kd">const</span> <span class="nx">handleChange</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">target</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="p">{</span> <span class="nx">formValues</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">formState</span><span class="p">;</span>
+      <span class="nx">formValues</span><span class="p">[</span><span class="nx">target</span><span class="p">.</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+      <span class="nx">setFormState</span><span class="p">({</span> <span class="nx">formValues</span> <span class="p">});</span>
+      <span class="nx">handleValidation</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">handleValidation</span> <span class="o">=</span> <span class="nx">target</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">target</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">fieldValidationErrors</span> <span class="o">=</span> <span class="nx">formState</span><span class="p">.</span><span class="nx">formErrors</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">validity</span> <span class="o">=</span> <span class="nx">formState</span><span class="p">.</span><span class="nx">formValidity</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">isEmail</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">isPassword</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">password</span><span class="dl">"</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">emailTest</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]{2,}</span><span class="sr">$/i</span><span class="p">;</span>
+
+      <span class="nx">validity</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="nx">fieldValidationErrors</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">validity</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+        <span class="p">?</span> <span class="dl">""</span>
+        <span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> is required and cannot be empty`</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">validity</span><span class="p">[</span><span class="nx">name</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isEmail</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">validity</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">emailTest</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+          <span class="nx">fieldValidationErrors</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">validity</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+            <span class="p">?</span> <span class="dl">""</span>
+            <span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> should be a valid email address`</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isPassword</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">validity</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">;</span>
+          <span class="nx">fieldValidationErrors</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">validity</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+            <span class="p">?</span> <span class="dl">""</span>
+            <span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> should be 3 characters minimum`</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="nx">setFormState</span><span class="p">({</span>
+        <span class="p">...</span><span class="nx">formState</span><span class="p">,</span>
+        <span class="na">formErrors</span><span class="p">:</span> <span class="nx">fieldValidationErrors</span><span class="p">,</span>
+        <span class="na">formValidity</span><span class="p">:</span> <span class="nx">validity</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">handleSubmit</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="p">{</span> <span class="nx">formValues</span><span class="p">,</span> <span class="nx">formValidity</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">formState</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">formValidity</span><span class="p">).</span><span class="nx">every</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// Form is valid</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">formValues</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">formValues</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">key</span><span class="p">,</span>
+            <span class="na">value</span><span class="p">:</span> <span class="nx">formValues</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+          <span class="p">};</span>
+          <span class="nx">handleValidation</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">container</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">row mb-5</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">col-lg-12 text-center</span><span class="dl">"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">mt-5</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">React</span> <span class="nx">regular</span> <span class="nx">form</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">row</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">col-lg-12</span><span class="dl">"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Email</span> <span class="nx">address</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">input</span>
+                  <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span>
+                  <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span>
+                  <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="s2">`form-control </span><span class="p">${</span>
+                    <span class="nx">formState</span><span class="p">.</span><span class="nx">formErrors</span><span class="p">.</span><span class="nx">email</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">is-invalid</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">""</span>
+                  <span class="p">}</span><span class="s2">`</span><span class="p">}</span>
+                  <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Enter email</span><span class="dl">"</span>
+                  <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChange</span><span class="p">}</span>
+                  <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">formState</span><span class="p">.</span><span class="nx">formValues</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span>
+                <span class="sr">/</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">invalid-feedback</span><span class="dl">"</span><span class="o">&gt;</span>
+                  <span class="p">{</span><span class="nx">formState</span><span class="p">.</span><span class="nx">formErrors</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span>
+                <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Password</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">input</span>
+                  <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span>
+                  <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span>
+                  <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="s2">`form-control </span><span class="p">${</span>
+                    <span class="nx">formState</span><span class="p">.</span><span class="nx">formErrors</span><span class="p">.</span><span class="nx">password</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">is-invalid</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">""</span>
+                  <span class="p">}</span><span class="s2">`</span><span class="p">}</span>
+                  <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Password</span><span class="dl">"</span>
+                  <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChange</span><span class="p">}</span>
+                  <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">formState</span><span class="p">.</span><span class="nx">formValues</span><span class="p">.</span><span class="nx">password</span><span class="p">}</span>
+                <span class="sr">/</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">invalid-feedback</span><span class="dl">"</span><span class="o">&gt;</span>
+                  <span class="p">{</span><span class="nx">formState</span><span class="p">.</span><span class="nx">formErrors</span><span class="p">.</span><span class="nx">password</span><span class="p">}</span>
+                <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">btn btn-primary btn-block</span><span class="dl">"</span><span class="o">&gt;</span>
+                <span class="nx">Submit</span>
+              <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">};</span></code></pre></figure>
+
+<p>trong ví dụ trên đay, chúng ta đã tạo 1 function component với 1 state có tên là formState nơi mà chúng ta lưu trữ state của input value, input validity và input errors. Form có 2 input là <code class="language-plaintext highlighter-rouge">email</code> và <code class="language-plaintext highlighter-rouge">password</code> và chúng ta cần khởi tạo giá trị ban đầu cho chúng.</p>
+
+<p>Tiếp theo chúng ta viết phần render cho Form, ta sửa dụng formValues để hiển thị giá trị của input trong khi formErrors dùng để chỉ ra các gía trị của form invalid.</p>
+
+<p>Tiếp theo chúng ta tạo ra function handleChange, function này sẽ update state value và chạy function handleValidation để kiểm tra giá trị mới. Function handleValidation là nơi mọt thứ trở nên phức tạp, đầu tiên nó cần kiểm tra input có hợp lệ và sau đó tiến hành xác nhận hợp lệ. Nếu là email field, nó phải kiểm tra định dạng email, nếu là password field nó phải kiểm trả tối thiểu 3 ký tự. Sau nó lưu message error vào formErrors và đánh dấu hợp lệ bằng formValidity.</p>
+
+<p>Cuối cùng ta cần viết function <code class="language-plaintext highlighter-rouge">handleSubmit</code>.</p>
+
+<p>Khi form valid, ta log giá trị. Nếu không thì chạy function handleValidation cho mỗi giá bên trong formValues object. React sẽ cho người dùng biết rằng họ đang sai ở giá trị nào.</p>
+
+<p>Và đó là cách để xây dựng form với React. Như bạn vừa thấy chỉ với 2 field cho một form thì đoạn code trên đã thực sự rất dài dòng. Thử tưởng tượng xem nó sẽ thế nào nếu bạn phải xử lý với form có hàng tá field.</p>
+
+<p>Giờ thì bạn đã biết được cách xây dựng form của React và kết quả của nó là code rất dài dòng, lặp đi lặp lại tốn thời gian. Giờ thì bạn đã sẵn sàng để tìm hiểu cách mà Formik giảm thiểu những phiền phức mà bạn gặp phải.</p>
+
+<h3 id="this-is-how-formik-can-help-you">This is how Formik can help you</h3>
+
+<p>Formik là một thư viện xử lý form phổ biến bởi vì nó cung cấp cho bạn form component có thể tái sử dụng, nơi mà bạn có thể đơn giản sử dụng API của nó để xử lý 3 vấn đề phiền phức nhấy khi xây dựng form.</p>
+
+<p>1 Lưu giá trị vào form
+2 Validation và error messages
+3 Xử lý submission</p>
+
+<p>Để bắt đầu với formik thì trước tiên ta cần phải cài đặt nó, bạn có thể cài đặt thông qua npm hoặc yarn command <code class="language-plaintext highlighter-rouge">yarn add formik</code>, Dưới đây là form tương tự với 2 field, được xây dựng bởi formik.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+  <span class="k">import</span> <span class="p">{</span> <span class="nx">Formik</span><span class="p">,</span> <span class="nx">Form</span><span class="p">,</span> <span class="nx">Field</span><span class="p">,</span> <span class="nx">ErrorMessage</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">formik</span><span class="dl">"</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">validateEmail</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">error</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Email is required</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="sr">/^</span><span class="se">[</span><span class="sr">A-Z0-9._%+-</span><span class="se">]</span><span class="sr">+@</span><span class="se">[</span><span class="sr">A-Z0-9.-</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[</span><span class="sr">A-Z</span><span class="se">]{2,4}</span><span class="sr">$/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">error</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Invalid email address format</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">validatePassword</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">error</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Password is required</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">error</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Password must be 3 characters at minimum</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">export</span> <span class="k">default</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="nx">values</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// form is valid</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">container</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">row mb-5</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">col-lg-12 text-center</span><span class="dl">"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">mt-5</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="nx">form</span> <span class="kd">with</span> <span class="nx">Formik</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Formik</span>
+          <span class="nx">initialValues</span><span class="o">=</span>
+          <span class="nx">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">onSubmit</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="p">{({</span> <span class="nx">errors</span><span class="p">,</span> <span class="nx">touched</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+              <span class="o">&lt;</span><span class="nx">Form</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+                  <span class="o">&lt;</span><span class="nx">label</span> <span class="nx">htmlFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Email</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">Field</span> 
+                  <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span>
+                  <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Enter email</span><span class="dl">"</span>
+                  <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="s2">`form-control </span><span class="p">${</span>
+                    <span class="nx">touched</span><span class="p">.</span><span class="nx">email</span> <span class="o">&amp;&amp;</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">email</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">is-invalid</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">""</span>
+                  <span class="p">}</span><span class="s2">`</span><span class="p">}</span>
+                  <span class="nx">validate</span><span class="o">=</span><span class="p">{</span><span class="nx">validateEmail</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">ErrorMessage</span>
+                  <span class="nx">component</span><span class="o">=</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span>
+                  <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span>
+                  <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">invalid-feedback</span><span class="dl">"</span>
+                <span class="o">/&gt;</span>
+                <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+                <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+                  <span class="o">&lt;</span><span class="nx">label</span> <span class="nx">htmlFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Password</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">Field</span> 
+                  <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span>
+                  <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span>
+                  <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Enter password</span><span class="dl">"</span>
+                  <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="s2">`form-control </span><span class="p">${</span>
+                    <span class="nx">touched</span><span class="p">.</span><span class="nx">password</span> <span class="o">&amp;&amp;</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">password</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">is-invalid</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">""</span>
+                  <span class="p">}</span><span class="s2">`</span><span class="p">}</span>
+                  <span class="nx">validate</span><span class="o">=</span><span class="p">{</span><span class="nx">validatePassword</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">ErrorMessage</span>
+                  <span class="nx">component</span><span class="o">=</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span>
+                  <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span>
+                  <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">invalid-feedback</span><span class="dl">"</span>
+                <span class="o">/&gt;</span>
+                <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+                <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">btn btn-primary btn-block</span><span class="dl">"</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Submit</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="sr">/Form</span><span class="err">&gt;
+</span>            <span class="p">)}</span>
+        <span class="o">&lt;</span><span class="sr">/Formik</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">};</span></code></pre></figure>
+
+<p>Form mới của chúng ta sử dụng 4 component được cung cấp bởi Formik: Formik, Form, Field, và ErrorMessage. Để sử dụng Formik, ta cần đặt component Form bên trong Formik component.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">Formik</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">Form</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="cm">/* the rest of the code here */</span><span class="p">}</span>
+  <span class="o">&lt;</span><span class="sr">/Form</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/Formik&gt;</span></code></pre></figure>
+
+<p>Tương tự như Form bình thường, ta phải khởi tạo giá trị ban đầu cho form với state, nhưng thay vì viết toàn bộ value, validation, validity ta chỉ đơn giản sử dụng thuộc tính initialValues của Formik. Formik component củng đồng thời nhận vào 1 function prop để xử lý sự kiện submit. Vì vậy hãy viết function onSubmit, function này chỉ chạy khi các giá trị của form valid.</p>
+
+<p>Tiếp theo ta viết form sử dụng Form component, đầu tiên ta truyền props từ formik vào Form, chúng ta nhận errors và touched props và có thể biết được khi nào field được touch hoặc chứa lỗi.</p>
+
+<p>ErrorMessage component từ Formik sẽ tự động hiển thị bất kì message lỗi nào từ props erros bằng việc matching name của Field componet.</p>
+
+<p>Hàm validation của Formik đơn giản truyền vào giá trị của field , nếu giá trị không hợp lệ, formik return message lỗi và trả về undefined nếu ngược lại.</p>
+
+<p>Và như vậy là việc xây dựng form bằng <code class="language-plaintext highlighter-rouge">Formik</code> đã hoàn thành, bạn vừa học được cách mà formik đã tối giản số lượng code mà bạn phải viết để xây dựng form. Thật tuyệt vời! Formik thực sự dễ dàng hơn nhiều so với regular form của React. Vậy <code class="language-plaintext highlighter-rouge">React Hook Form</code> có thực sự mang lại nhiều lợi ích hơn so với Formik. Thực ra React Hook Form còn tốt hơn nhiều so với Formik.</p>
+
+<h3 id="enter-react-hook-form">Enter React Hook Form</h3>
+
+<p>Giống như formik, React Hook Form là một thư viện xây dựng form mục đích giảm thiểu sự phiền phức khi làm việc với form của React. Điểm khác biệt lớn giữa hai loại này là React Hook Form được thiết kế để sử dụng các component không được kiểm soát để trách việc re-render không cần thiết do người dùng nhập input.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+  <span class="k">import</span> <span class="p">{</span> <span class="nx">useForm</span><span class="p">,</span> <span class="nx">ErrorMessage</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-hook-form</span><span class="dl">"</span><span class="p">;</span>
+  <span class="k">import</span> <span class="dl">"</span><span class="s2">bootstrap/dist/css/bootstrap.css</span><span class="dl">"</span><span class="p">;</span>
+
+  <span class="k">export</span> <span class="k">default</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">register</span><span class="p">,</span> <span class="nx">errors</span><span class="p">,</span> <span class="nx">handleSubmit</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useForm</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="nx">values</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// form is valid</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">container</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">row mb-5</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">col-lg-12 text-center</span><span class="dl">"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">mt-5</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="nx">form</span> <span class="kd">with</span> <span class="nx">React</span> <span class="nx">Hook</span> <span class="nx">Form</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">(</span><span class="nx">onSubmit</span><span class="p">)}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">label</span> <span class="nx">htmlFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Email</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">input</span>
+            <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span>
+            <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Enter email</span><span class="dl">"</span>
+            <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="s2">`form-control </span><span class="p">${</span>
+              <span class="nx">errors</span><span class="p">.</span><span class="nx">email</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">is-invalid</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">""</span>
+            <span class="p">}</span><span class="s2">`</span><span class="p">}</span>
+            <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">register</span><span class="p">({</span>
+              <span class="na">required</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Email is required</span><span class="dl">"</span><span class="p">,</span>
+              <span class="na">pattern</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">value</span><span class="p">:</span> <span class="sr">/^</span><span class="se">[</span><span class="sr">A-Z0-9._%+-</span><span class="se">]</span><span class="sr">+@</span><span class="se">[</span><span class="sr">A-Z0-9.-</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[</span><span class="sr">A-Z</span><span class="se">]{2,4}</span><span class="sr">$/i</span><span class="p">,</span>
+                <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Invalid email address format</span><span class="dl">"</span>
+              <span class="p">}</span>
+            <span class="p">})}</span>
+          <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">ErrorMessage</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">invalid-feedback</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span> <span class="k">as</span><span class="o">=</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span> <span class="nx">errors</span><span class="o">=</span><span class="p">{</span><span class="nx">errors</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-group</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">label</span> <span class="nx">htmlFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Password</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">input</span>
+          <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span>
+          <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Enter password</span><span class="dl">"</span>
+            <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="s2">`form-control </span><span class="p">${</span>
+              <span class="nx">errors</span><span class="p">.</span><span class="nx">password</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">is-invalid</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">""</span>
+            <span class="p">}</span><span class="s2">`</span><span class="p">}</span>
+          <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">register</span><span class="p">({</span>
+            <span class="na">required</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Password is required</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">validate</span><span class="p">:</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">Password must be 3 characters at minimum</span><span class="dl">"</span>
+          <span class="p">})}</span>
+        <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">ErrorMessage</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">invalid-feedback</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span> <span class="k">as</span><span class="o">=</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span> <span class="nx">errors</span><span class="o">=</span><span class="p">{</span><span class="nx">errors</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">btn btn-primary btn-block</span><span class="dl">"</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Submit</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">};</span></code></pre></figure>
+
+<p>Để bắt đầu sử dụng <code class="language-plaintext highlighter-rouge">React Hook Form</code>, ta cần cài nó thông qua npm hoặc yarn command <code class="language-plaintext highlighter-rouge">yarn add react-hook-form</code>.  Tiếp theo ta cần import useForm hook, cái sẽ xử lý việc nhận input, validation và submit form. và ErrorMessage component tương tự Formik.</p>
+
+<p>Đầu tiên, ta gọi <code class="language-plaintext highlighter-rouge">useForm</code> hook, thứ sẽ trả về một object với những function cho việc build form.</p>
+
+<p>Ý tường cốt lỗi của React Form Hook là <code class="language-plaintext highlighter-rouge">register</code> component không được kiểm soát vào hook bằng việc sử dụng <code class="language-plaintext highlighter-rouge">ref</code> prop. Nó làm cho values có thể sử dụng ở cả form validation và submission.</p>
+
+<p>Hàm <code class="language-plaintext highlighter-rouge">register</code> củng cung cấp việc tạo các validation rule cho input. React Hook Form validation rule được thiết kế đơn giản tương tự HTML validation. Bất kì message nhận được sẽ truyền vào errors object. Chúng ta sẽ truyền errros object vào <code class="language-plaintext highlighter-rouge">ErrorMessage</code> Component, nó sẽ matching errors object với name prop của nó.</p>
+
+<p>Cuối cùng ta cần truyền <code class="language-plaintext highlighter-rouge">handleSubmit</code> vào onSubmit prop. Và vậy là hoàn thành. Ngoài việc giảm thiểu các dòng code, <code class="language-plaintext highlighter-rouge">React Hook Form</code> còn có hiệu năng tốt hơn thông qua việc giảm thiểu việc re-render.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Thông qua bài viết, bạn đã nắm được những rắc rối khi xây dựng form với React và cách mà những thư viện như <code class="language-plaintext highlighter-rouge">Formik</code> và <code class="language-plaintext highlighter-rouge">React Hook Form</code> giải quyết bài toán này. Cả hai đều cùng giải một bài toán nhưng cách của React Hook Form cho phép nó đạt kết quả tốt hơn so với Formik. Ngoài ra bạn không cần import bất kì component nào ngoài việc viết cả input với prop ref. Nếu bạn đang tìm kiếm một thư viện để xây dựng form, tôi đề xuất bạn sử dụng <code class="language-plaintext highlighter-rouge">React Form Hook</code>.</p>
+
+  </article>
+</div>
+
+<div class="share-buttons">
+  <h6>Share on: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2020-06/react-form-hook" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2020-06/react-form-hook" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2020-06/react-form-hook" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2020-06/react-form-hook" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2020-06/react-form-hook" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+
+        <footer>
+  &copy; 2020 Nguyen Thanh Minh. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a> made with <i class="fa fa-heart heart-icon"></i>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

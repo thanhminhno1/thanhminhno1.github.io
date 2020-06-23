@@ -1,6 +1,10 @@
 /* LAYOUT CSS */
 .cover {
-  background-color: $background-color;
+  // background-color: $background-color;
+  background-image: url("https://d1qmdf3vop2l07.cloudfront.net/jovial-peafowl.cloudvent.net/compressed/_min_/c9c4c34cb3f08447368de5fa76f9911d.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   position: fixed;
   text-align: center;
   width: 100%;
@@ -18,7 +22,7 @@
   }
 }
 .cover-card {
-  color: $text-color;
+  color: $white;
   padding: 0 30px;
   .avatar {
     border-radius: 50%;
@@ -31,13 +35,13 @@
   }
   .author_name {
     display: block;
-    color: #F36170;
+    color: $white;
     font-size: 1.75em;
     text-transform: lowercase;
   }
   .author_job {
     display: block;
-    color: $secondary;
+    color: $white;
     font-size: 0.8em;
     font-weight: 700;
     text-transform: uppercase;
@@ -63,10 +67,10 @@
       display: inline-block;
       margin-left: 1em;
       a.social-link-item {
-        color: $secondary;
+        color: $white;
         &:hover,
         &:focus {
-          color: lighten($secondary, 14%);
+          color: lighten($white, 14%);
         }
       }
     }
@@ -90,10 +94,10 @@
       margin-top: 1em;
       text-transform: lowercase;
       font-size: 85%;
-      color: $secondary;
+      color: $white;
       &:hover,
       &:focus {
-        color: lighten($secondary, 14%);
+        color: lighten($white, 14%);
       }
     }
   }

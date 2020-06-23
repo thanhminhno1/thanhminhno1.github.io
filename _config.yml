@@ -3,18 +3,18 @@
 # Site wide configuration
 ####################################
 #
-title: Leonids
-email:
-description: A simple and awesome blog theme powered by jekyll.
-url: # the base hostname & protocol for your site
-keywords: ["blog", "jekyll"]
+title: Minh's Blog
+email: nguyenthanhminh10101994@gmail.com
+description: Blog về công nghệ và cuộc sống.
+url: thanhminhno1.github.io
+keywords: ["blog", "thanhminhno1"]
 
 #
 ###################################
 # Jekyll configuration
 ####################################
 #
-timezone:          Europe/Paris
+timezone:          Asia/Ho_Chi_Minh
 markdown:          kramdown
 highlighter:       rouge
 excerpt_separator: <!--more-->
@@ -33,14 +33,14 @@ kramdown:
 ####################################
 #
 owner:
-  name: Leonids
-  avatar: leonids-logo.png
-  job: "A jekyll theme"
-  bio: "A simple and awesome blog theme powered by jekyll."
-  email:
+  name: Nguyen Thanh Minh
+  avatar: avatar.jpeg
+  job: "Web Developer"
+  bio: "Blog về công nghệ và cuộc sống"
+  email: nguyenthanhminh10101994@gmail.com
   disqus-shortname:
   twitter: #username
-  facebook: #username
+  facebook: thanhminhno1
   google:
     plus: #username
     analytics:
@@ -48,7 +48,7 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
-  github: #username
+  github: thanhminhno1
   gitlab: #username
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
   linkedin: #username

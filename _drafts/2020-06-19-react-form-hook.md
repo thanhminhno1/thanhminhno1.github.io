@@ -1,17 +1,26 @@
 ---
 layout: post
-title: Syntax Highlighting Post
+title: React Form Hook
 excerpt: "Demo post displaying the various ways of highlighting code in Markdown."
-categories: [code]
-modified: 2014-09-14
+tags: [sample post, code, highlighting]
+modified: 2020-06-19
 comments: true
 ---
 
-Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.[^1]
+Làm việc với form và một trong những vấn để thử thách nhất khi phát triển ứng dụng bằng React. React là một thư viện tối giản chỉ tập trung vào việc kiểm soát sự thay đổi của giao diện, đảm bảo răng giao diện người dùng sẽ thay đổi phù hợp với hoạt động người dùng. Nó không cung cấp một giải pháp hoàn chỉnh nào cho việc sử dụng input nhưng nó cung cho ta phương thức để lưu giá trị của input vào state.
 
-[^1]: [Syntax Highlighting](http://en.wikipedia.org/wiki/Syntax_highlighting)
+Việc xử lý form với React yêu cầu bạn phải viết một số đoạn mã phục vụ việc:
+1. Quản lý vào kiểm soát giá trị input mà bạn lưu vào state
+2. Theo dõi error messages
+3. xử lý submission
 
-### Pygments Code Blocks
+Để việc xử lý form được đơn giản hơn, nhiều developer đã tạo ra các thư viện giúp build form với React. Một trong những thư viện phổ biến nhất là [Formik](https://jaredpalmer.com/formik/) 
+
+Bản thân tôi đã từng sử dụng thư viện này như một giải pháp khi làm việc với Form của React và nó hoạt động thực sự tuyệt vời, Nhưng gần đây tôi đang làm việc với một thư viện mới có tên là [React Hook Form](https://react-hook-form.com/)
+
+Trong bài viết này tôi sẽ cho bạn thấy được lợi ích của việc sử dụng React Hook Form hơn là sử dụng Formik. Nhưng đầu tiên hãy tìm hiểu làm thế nào để tạo ra Form bằng React Form.
+
+### How to handle forms with React
 
 To modify styling and highlight colors edit `/_sass/_pygments.scss`.
 
@@ -113,3 +122,9 @@ module Jekyll
   end
 end
 ~~~
+
+### GitHub Gist Embed
+
+An example of a Gist embed below.
+
+{% gist mmistakes/6589546 %}
